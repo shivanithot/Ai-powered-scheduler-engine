@@ -1,0 +1,82 @@
+<main
+    class="max-w-screen-xl mx-auto p-8 border border-gray-300 rounded-lg shadow-lg mt-8 bg-gray-100">
+    <h1 class="text-black text-lg font-ubuntu">Create New Job</h1>
+
+    <!-- Job Name Input -->
+    <div class="grid grid-cols-3 gap-8 mt-4">
+        <input type="text"
+            class="border border-gray-300 p-3 bg-white font-ubuntu rounded-full w-full"
+            placeholder="Enter job name" [(ngModel)]="jobName" />
+
+        <!-- Schedule Input: Accepts cron syntax -->
+        <input type="text"
+            class="border border-gray-300 p-3 bg-white font-ubuntu rounded-full w-full"
+            placeholder="Enter schedule (Cron syntax)" [(ngModel)]="schedule" />
+
+        <!-- Optional Continuous Field -->
+        <div class="flex items-center space-x-2">
+            <mat-checkbox id="continuous" [(ngModel)]="continuous"></mat-checkbox>
+            <label for="continuous" class="text-black font-ubuntu">Continuous</label>
+        </div>
+    </div>
+
+    <div class="mt-14">
+        <h2 class="text-black text-lg font-ubuntu">Enter Task Details</h2>
+        <!-- Use flex layout to place inputs in one line -->
+        <div class="flex gap-8 mt-4">
+            <input type="text" id="notebook_path"
+                class="border border-gray-300 p-3 bg-white font-ubuntu text-black rounded-full w-80"
+                placeholder="Enter notebook path" [(ngModel)]="notebookPath" />
+            <input type="text" id="source"
+                class="border border-gray-300 p-3 bg-white font-ubuntu text-black rounded-full w-80"
+                placeholder="Enter source" [(ngModel)]="source" />
+            <input type="text" id="task_key"
+                class="border border-gray-300 p-3 bg-white font-ubuntu text-black rounded-full w-80"
+                placeholder="Enter task key" [(ngModel)]="taskKey" />
+            <button (click)="addTask()"
+                class="bg-black text-white font-ubuntu p-3 rounded-full">Create Task</button>
+        </div>
+    </div>
+    <!-- Tailwind Custom CSS for the Arrow -->
+    <style>
+        .task-container:not(:last-child)::after {
+            content: "→";
+            /* Arrow */
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            /* Adjust this value based on your layout */
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            /* Arrow size (24px) */
+            color: black;
+            /* Arrow color */
+        }
+    </style>
+    </main>
+
+<!-- Tasks Container -->
+<div class="mt-8 max-w-screen-xl mx-auto">
+    <h2 class="text-black text-lg font-ubuntu">Tasks Sequence</h2>
+    <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Loop through tasks -->
+        <div *ngFor="let task of tasks" class="task-container relative">
+            <div
+                class="task-div bg-white text-black p-4 border border-gray-300 rounded-md shadow-lg">
+                <div class="flex">
+                    <h1 class="mr-2 font-semibold">Task Key:</h1>
+                    <span>{{ task.taskKey }}</span>
+                </div>
+                <div class="flex">
+                    <h1 class="mr-2 font-semibold">Notebook Path:</h1>
+                    <span>{{ task.notebookPath }}</span>
+                </div>
+                <div class="flex">
+                    <h1 class="mr-2 font-semibold">Source:</h1>
+                    <span>{{ task.source }}</span>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>

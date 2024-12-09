@@ -1,0 +1,27 @@
+<nav
+  class="sticky top-0 bg-white backdrop-blur-sm backdrop-filter bg-opacity-90 border border-gray-100 flex w-full justify-between rounded-none px-2 py-4 shadow-md sm:px-4 md:px-6 lg:px-8 xl:px-[5%] z-50"
+>
+  <div class="flex items-center">
+    <a
+      routerLink="/"
+      class="font-ubuntu text-xl font-bold leading-none tracking-wider text-stone-800"
+    >
+      Chron.ai
+    </a>
+    <div
+      class="ml-2 hidden items-center rounded-md bg-black px-2 py-2 text-xs uppercase leading-none tracking-widest text-white sm:flex"
+    >
+      Beta Build
+    </div>
+  </div>
+  <div class="flex gap-4">
+    <a routerLink="/jobs/create" mat-raised-button>
+      <mat-icon>add</mat-icon>
+      Create a new job
+    </a>
+    <button mat-button>
+      <mat-icon>help</mat-icon>
+      Ask Assistant
+    </button>
+  </div>
+</nav>

@@ -1,0 +1,43 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <!-- This is the tree node template for leaf nodes -->
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <!-- use a disabled button to provide padding for tree leaf -->
+    <button
+      mat-icon-button
+      disabled
+      class="flex items-center justify-center gap-2"
+    ></button>
+    @if (node.item.object_type !== "DIRECTORY") {
+      <button class="flex items-center justify-center gap-2" type="">
+        <mat-icon class="mat-icon-rtl-mirror"> article </mat-icon>
+        {{ getTheLastName(node.item.path) }}
+      </button>
+    } @else {
+      <div class="flex items-center justify-center gap-2" type="">
+        <mat-icon class="mat-icon-rtl-mirror">folder_open </mat-icon>
+        {{ getTheLastName(node.item.path) }}
+      </div>
+    }
+  </mat-tree-node>
+  <!-- This is the tree node template for expandable nodes -->
+  <mat-tree-node
+    *matTreeNodeDef="let node; when: hasChild"
+    matTreeNodePadding
+    matTreeNodeToggle
+    [cdkTreeNodeTypeaheadLabel]="node.item.path"
+  >
+    <button
+      mat-icon-button
+      matTreeNodeToggle
+      [attr.aria-label]="'Toggle ' + node.item.path"
+    >
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+      </mat-icon>
+    </button>
+    <div class="flex items-center justify-center gap-2" type="">
+      <mat-icon class="mat-icon-rtl-mirror"> snippet_folder </mat-icon>
+      {{ getTheLastName(node.item.path) }}
+    </div>
+  </mat-tree-node>
+</mat-tree>

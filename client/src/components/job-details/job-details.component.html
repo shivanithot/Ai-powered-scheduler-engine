@@ -1,0 +1,83 @@
+<div class="flex w-full flex-col items-center justify-center gap-4">
+  @if (loading) {
+    <div class="my-2 flex items-center justify-center">
+      <mat-progress-spinner
+        strokeWidth="2"
+        diameter="30"
+        class="text-xl"
+        mode="indeterminate"
+      />
+    </div>
+  } @else {
+    <table>
+      <tbody>
+        <tr>
+          <th>Max Concurrent Runs</th>
+          <td>
+            {{ jobData!.settings.max_concurrent_runs }}
+          </td>
+          <td></td>
+        </tr>
+        @if (jobData!.settings.schedule) {
+          <tr>
+            <th>Schedule Pause Status</th>
+            <td>
+              @if (working) {
+                <mat-progress-spinner
+                  strokeWidth="1"
+                  diameter="12"
+                  mode="indeterminate"
+                />
+              } @else {
+                {{ jobData!.settings.schedule!.pause_status }}
+              }
+            </td>
+            <td>
+              <mat-slide-toggle
+                (toggleChange)="play_pause()"
+                [(ngModel)]="pause_status"
+                [disabled]="working"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>Schedule Timezone</th>
+            <td>{{ jobData!.settings.schedule!.timezone_id }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>Schedule Cron Expression</th>
+            <td>
+              {{ jobData!.settings.schedule!.quartz_cron_expression }}
+            </td>
+            <td></td>
+          </tr>
+        }
+        @for (
+          task of jobData!.settings.tasks;
+          track task.task_key;
+          let idx = $index
+        ) {
+          <table>
+            <tr>
+              <th>#</th>
+              <td>{{ idx + 1 }}</td>
+            </tr>
+            <tr>
+              <th>Task Key</th>
+              <td>{{ task.task_key }}</td>
+            </tr>
+            <tr>
+              <th>Cluster Id</th>
+              <td>{{ task.existing_cluster_id }}</td>
+            </tr>
+            <tr>
+              <th>Notebook Path</th>
+              <td>{{ task.notebook_task.notebook_path }}</td>
+            </tr>
+          </table>
+        }
+      </tbody>
+    </table>
+  }
+</div>

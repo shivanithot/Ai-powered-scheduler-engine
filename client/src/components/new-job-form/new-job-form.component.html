@@ -1,0 +1,154 @@
+<main>
+    <button mat-raised-button (click)="isLinear = !isLinear"
+        id="toggle-linear">
+        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+    </button>
+    <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+
+        <!-- 1st Stepper -->
+
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Fill the Job
+                    Name</ng-template>
+                <mat-form-field>
+                    <mat-label>Job Name</mat-label>
+                    <input matInput placeholder="Job Name"
+                        formControlName="firstCtrl" required>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- 2nd Stepper  -->
+
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup" class="flex space-x-4">
+                <ng-template matStepLabel>Enter Tasks</ng-template>
+                <mat-form-field>
+                    <mat-label>Select Cluster</mat-label>
+                    <mat-select [value]="selectedClusterId"
+                        (selectionChange)="onClusterSelect($event)"
+                        required>
+                        <mat-option *ngFor="let cluster of clusters"
+                            [value]="cluster.clusterId">
+                            {{ cluster.clusterName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Task Key</mat-label>
+                    <input matInput placeholder="Enter task key"
+                        formControlName="firstCtrl"
+                        [(ngModel)]="taskKey" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Enter Notebook Path</mat-label>
+                    <input matInput
+                        placeholder="Enter the notebook path"
+                        formControlName="firstCtrl"
+                        [(ngModel)]="notebookPath" required>
+                </mat-form-field>
+
+                <button mat-stroked-button (click)="addTask()">Add
+                    Task</button>
+
+            </form>
+
+            <p class="text-sm">Your tasks hierarchy</p>
+            <div class="flex space-x-4">
+                <div class="flex flex-col space-y-2 border border-gray-300 rounded-md p-2"
+                    *ngFor="let task of tasks">
+                    <p class="text-md">Cluster Id: {{task.clusterId}}
+                    </p>
+                    <p class="text-md">Task Key: {{task.taskKey}}</p>
+                    <p class="text-md">Notebook Path:
+                        {{task.notebookPath}}</p>
+                </div>
+            </div>
+
+
+
+
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+        <!-- 3rd Stepper -->
+
+        <!-- 3rd Stepper -->
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Check Schedule
+                    Options</ng-template>
+                <mat-form-field>
+                    <mat-label>Select Options</mat-label>
+                    <input type="text" placeholder="Pick one"
+                        aria-label="Number" matInput
+                        [formControl]="myControl"
+                        [matAutocomplete]="auto" required>
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option
+                            *ngFor="let option of filteredOptions | async"
+                            [value]="option">{{option}}</mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <div *ngIf="selectedOptions === 'schedule'"
+                    class="flex space-x-4">
+                    <mat-form-field>
+                        <mat-label>Enter Cron Syntax</mat-label>
+                        <input matInput formControlName="cronSyntax"
+                            required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Enter Pause Status</mat-label>
+                        <input type="text" placeholder="Pause Status"
+                            matInput
+                            [formControl]="pauseStatusControl"
+                            [matAutocomplete]="pauseStatusAuto"
+                            required>
+                        <mat-autocomplete
+                            #pauseStatusAuto="matAutocomplete">
+                            <mat-option
+                                *ngFor="let status of pauseStatusOptions"
+                                [value]="status">{{status}}</mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Select Time Zone</mat-label>
+                        <mat-select formControlName="timeZone"
+                            required>
+                            <mat-option *ngFor="let tz of timeZones"
+                                [value]="tz.value">{{tz.viewValue}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-button
+                        matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+
+        <!-- 4th Stepper -->
+
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>Task should be created successfully.</p>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button
+                    (click)="generateJsonOutput()">Done</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+
+</main>

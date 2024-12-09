@@ -1,0 +1,78 @@
+<main>
+  <section class="px-2 py-4 sm:px-4 md:px-6 lg:px-8 xl:px-[5%]">
+    <section class="bg-white">
+      <div
+        class="mx-auto grid max-w-screen-xl px-4 pb-8 pt-20 lg:grid-cols-12 lg:gap-8 lg:py-16 lg:pt-28 xl:gap-0"
+      >
+        <div class="mr-auto place-self-center lg:col-span-7">
+          <h1
+            class="mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl"
+          >
+            Schedule Jobs <br />
+            Without Hassle
+          </h1>
+          <p
+            class="mb-6 max-w-xl font-light text-gray-500 md:text-lg lg:mb-8 lg:text-xl"
+          >
+            A platform which serves the purpose for scheduling your ML jobs with
+            feature ranging from AI scheduling to premptive management of
+            resources.
+          </p>
+        </div>
+        <div class="hidden lg:col-span-5 lg:mt-0 lg:flex">
+          <img
+            src="https://demo.themesberg.com/landwind/images/hero.png"
+            alt="hero image"
+          />
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section class="bg-gray-100 px-2 py-4 sm:px-4 md:px-6 lg:px-8 xl:px-[5%]">
+    <h1 class="text-3xl font-semibold capitalize tracking-widest">
+      What we offer
+    </h1>
+    <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+      <app-feature-card
+        heading="CRUD operation for the JOB"
+        content="The platform is capable of performing Create, Read, Update, Delete the jobs, based on user selection."
+        cta="View all Jobs"
+        image="assets/crud.jpg"
+        ctaUrl="/jobs"
+      />
+      <app-feature-card
+        heading="Schedule Jobs"
+        content="Using Flask REST API's, jobs are being scheduled on the platform with different variables and dependency supporting the jobs."
+        image="assets/schedule-image.jpeg"
+        cta="Schedule a new job"
+        ctaUrl="/jobs/schedule"
+      />
+      <app-feature-card
+        heading="Priority Scheduling"
+        content="The platform holds the capiblity of scheduling a job with a pre assigned priority which will help assign a certain job to get the preecedence before another for the priority."
+        cta="How it works"
+        image="assets/schedule-image.jpeg"
+        ctaUrl="/jobs/schedule"
+      />
+      <app-feature-card
+        heading="AI Features"
+        content="The Platform holds a specific AI integrated platform which will help the user resolve errors while scheduling a job or performing a certain task on the platform such as Isuue-detection, Resource-scalling, etc."
+        cta="Use assistant"
+        image="assets/ai.jpeg"
+        ctaUrl="/jobs/schedule"
+      />
+    </div>
+  </section>
+
+  <!-- <section class="bg-white dark:bg-gray-900"> -->
+  <!--   <div class="mx-auto max-w-screen-xl px-4 pb-8 pt-8 lg:px-6"> -->
+  <!--     <h2 -->
+  <!--       class="mb-6 text-center text-3xl font-extrabold tracking-tight text-gray-900 lg:mb-8 lg:text-3xl dark:text-white" -->
+  <!--     > -->
+  <!--       Frequently asked questions -->
+  <!--     </h2> -->
+  <!--     <div class="mx-auto max-w-screen-md"></div> -->
+  <!--   </div> -->
+  <!-- </section> -->
+</main>

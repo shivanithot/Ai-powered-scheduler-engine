@@ -1,0 +1,118 @@
+<main class="max-w-screen-xl mx-auto p-4 mt-8">
+  <h1 class="text-lg text-black font-ubuntu uppercase">Schedule a job</h1>
+
+  <div class="flex items-center space-x-4 mt-8">
+    <input
+      type="text"
+      class="border border-zinc-500 p-3 w-1/4 bg-transparent font-ubuntu rounded-full text-black"
+      placeholder="Enter Job Id"
+    />
+    <button mat-flat-button>
+      <h1 class="font-ubuntu">Schedule</h1>
+    </button>
+  </div>
+
+  <!-- DataBase Table -->
+  <div class="flex justify-between items-center mt-12">
+    <h1 class="text-xl font-ubuntu text-black uppercase">Overview</h1>
+
+    <!-- Filters section -->
+    <div class="relative">
+      <button mat-stroked-button (click)="toggleFilters()">
+        <h1 class="font-ubuntu">
+          <i class="fa-solid fa-filter mr-2"></i>Toggle Filter
+        </h1>
+      </button>
+
+      <!-- Dropdown for filters, toggle visibility based on 'showFilters' -->
+      <div
+        *ngIf="showFilters"
+        class="absolute right-0 mt-2 w-64 bg-gray-200 py-2 border border-gray-300 rounded-md"
+      >
+        <!-- Filter by Status -->
+        <div class="p-4">
+          <label class="block mb-2 text-sm font-medium text-black font-ubuntu"
+            >Status</label
+          >
+          <select
+            class="p-2 border bg-transparent text-black font-ubuntu pr-8 bg-white rounded-md"
+            [(ngModel)]="statusFilter"
+          >
+            <option value="">All</option>
+            <option value="Success">Success</option>
+            <option value="Failure">Failure</option>
+          </select>
+        </div>
+
+        <!-- Filter by Pause Status -->
+        <div class="p-4">
+          <label class="block mb-2 text-sm font-medium text-black font-ubuntu"
+            >Pause Status</label
+          >
+          <select
+            class="w-full p-2 border bg-transparent text-black font-ubuntu pr-8 bg-white rounded-md"
+            [(ngModel)]="pauseStatusFilter"
+          >
+            <option value="">All</option>
+            <option value="Paused">Paused</option>
+            <option value="Active">Active</option>
+          </select>
+        </div>
+
+        <div class="px-4 py-2">
+          <button
+            class="bg-black text-white px-4 py-2 focus:outline-none w-full hover:bg-gray-300 font-ubuntu rounded-md"
+            (click)="toggleFilters()"
+          >
+            Apply
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="grid grid-cols-5 gap-4 bg-gray-200 p-2 border-b-2 border-b-gray-300 mt-8"
+  >
+    <div class="py-3 px-6 font-ubuntu text-black text-md">#</div>
+    <div class="py-3 px-6 font-ubuntu text-black text-md">Job ID</div>
+    <div class="py-3 px-6 font-ubuntu text-black text-md">Name</div>
+    <div class="py-3 px-6 font-ubuntu text-black text-md">Created By</div>
+    <div class="py-3 px-6 font-ubuntu text-black text-md">Action</div>
+  </div>
+
+  <!-- Table Rows -->
+  <div class="mt-8">
+    @if (loading) {
+      <h1>Loading jobs...</h1>
+    } @else {
+      @for (job of jobs; track job.job_id; let idx = $index) {
+        <div class="grid grid-cols-5 font-ubuntu p-4">
+          <div class="flex flex-col">
+            <span>{{ idx + 1 }}</span>
+          </div>
+          <div class="flex flex-col">
+            <span>{{ job.job_id }}</span>
+          </div>
+          <div class="flex flex-col">
+            <span>{{ job.settings.name }}</span>
+          </div>
+          <div class="flex flex-col">
+            <span>{{ job.creator_user_name }}</span>
+          </div>
+          <div>
+            <button
+              mat-icon-button
+              aria-label="Example icon button with a vertical three dot icon"
+              (click)="deleteJob(job.job_id)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      } @empty {
+        <h1>There are no jobs available right now!</h1>
+      }
+    }
+  </div>
+</main>

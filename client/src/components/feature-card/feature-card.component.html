@@ -1,0 +1,12 @@
+<mat-card appearance="outlined" class="w-full py-2">
+  <mat-card-title class="p-4">{{ heading }}</mat-card-title>
+  <img class="mb-2 h-40 object-cover" [src]="image" mat-card-image />
+  <mat-card-content>
+    {{ content }}
+  </mat-card-content>
+  <mat-card-actions>
+    <a [routerLink]="ctaUrl">
+      <button mat-flat-button>{{ cta }}</button>
+    </a>
+  </mat-card-actions>
+</mat-card>

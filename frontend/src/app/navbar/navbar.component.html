@@ -1,0 +1,67 @@
+<main class="p-4 bg-white shadow-md rounded-md">
+  <nav
+    class="max-w-screen-xl mx-auto flex justify-between items-center p-2 rounded-md"
+  >
+    <div class="flex items-center">
+      <a routerLink="/" class="text-stone-800 font-ubuntu text-xl leading-none"
+        >Chron.ai</a
+      >
+      <div
+        class="ml-2 px-2 py-2 bg-black text-white text-xs font-semibold rounded-md leading-none flex items-center"
+      >
+        Beta Build
+      </div>
+    </div>
+
+    <div class="flex items-center ml-auto space-x-4">
+      <button mat-stroked-button>
+        <a class="font-ubuntu" routerLink="/create-job">
+          <i class="fa-solid fa-plus mr-2"></i>Create new Job
+        </a>
+      </button>
+
+      <!-- Ask Chron Assistant Button with rounded-md -->
+      <button mat-button (click)="toggleShowAssistant()">
+        <h1 class="font-ubuntu">
+          <i class="fa-solid fa-circle-info mr-2"></i> Ask Chron Assistant
+        </h1>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Assistant Panel -->
+  <div
+    *ngIf="showAssistant"
+    class="fixed right-0 h-full bg-gray-200 text-white shadow-xl transition-all translate-x-0 w-2/5 z-20 rounded-xl border border-slate-300 mt-4"
+  >
+    <div class="p-4">
+      <button
+        (click)="toggleShowAssistant()"
+        class="text-black font-ubuntu mb-4 text-lg"
+      >
+        <i class="fa-solid fa-times"></i>
+      </button>
+      <h2 class="text-lg text-black font-ubuntu mb-4 text-center">
+        Welcome to Chron Assistant
+      </h2>
+      <p class="font-ubuntu text-black">
+        You can provide help, guidance, or other information here.
+      </p>
+      <form class="mt-8">
+        <input
+          type="text"
+          placeholder="Type your message..."
+          class="w-full p-3 border border-gray-300 rounded-full text-black"
+        />
+        <button
+          type="submit"
+          class="mt-2 w-full bg-black text-white p-3 rounded-full font-ubuntu"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<router-outlet></router-outlet>
